@@ -428,8 +428,7 @@ document.addEventListener("click", function(e){
   if(bar.contains(e.target)) return;
   if(e.target.closest && e.target.closest("#lockBtn")) return;
   bar.classList.remove("open");
-}, true);
-})();</script><script data-page-node-id="wVpwE84hq7WVroipaU6uXY" data-pnid-children="U864D5Bm8tUy9yl7QarW3M" data-smartpage-injected="database">;(function(){"use strict";function e(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,n=Array(t);r<t;r++)n[r]=e[r];return n}function t(e,t){if(!(e instanceof t))throw TypeError("Cannot call a class as a function")}function r(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function n(e,t,n){return t&&r(e.prototype,t),n&&r(e,n),e}function a(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}var i=function(){"use strict";function e(){var r=this,n=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"*";t(this,e),a(this,"targetWindow",void 0),a(this,"targetOrigin",void 0),a(this,"pendingRequests",new Map),a(this,"counter",0),a(this,"RPC_TIMEOUT",3e4),this.targetWindow=window.parent,this.targetOrigin=n,window.addEventListener("message",function(e){var t=e.data;(null==t?void 0:t.type)==="rpc:response"&&r.handleResponse(t)})}return n(e,[{key:"call",value:function(e,t){var r=this,n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:this.RPC_TIMEOUT,i="rpc_".concat(Date.now(),"_").concat(++this.counter),o={id:i,method:e,params:void 0!==t?[t]:[],timestamp:Date.now()};return new Promise(function(t,s){var u=window.setTimeout(function(){r.pendingRequests.delete(i),s(Error("[database-sdk] RPC timeout: ".concat(e)))},n);r.pendingRequests.set(i,{resolve:t,reject:s,timer:u}),r.targetWindow.postMessage(function(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{},n=Object.keys(r);"function"==typeof Object.getOwnPropertySymbols&&(n=n.concat(Object.getOwnPropertySymbols(r).filter(function(e){return Object.getOwnPropertyDescriptor(r,e).enumerable}))),n.forEach(function(t){a(e,t,r[t])})}return e}({type:"rpc:request"},o),r.targetOrigin)})}},{key:"handleResponse",value:function(e){var t=this.pendingRequests.get(e.id);t&&(this.pendingRequests.delete(e.id),clearTimeout(t.timer),e.error?t.reject(Error("[database-sdk] RPC error: ".concat(e.error.message))):t.resolve(e.result))}}]),e}(),o=function(){"use strict";function r(){var n=this;t(this,r),a(this,"bridge",void 0),a(this,"csvUpdatedHandlers",new Set),this.bridge=new i(function(){try{var e=window.location.ancestorOrigins;if(e&&e.length>0){var t=e[0];if("string"==typeof t&&t)return t}}catch(e){}try{if(document.referrer)return new URL(document.referrer).origin}catch(e){}return console.warn("[smartpage-database-sdk] cannot resolve parent origin, falling back to '*'"),"*"}()),window.addEventListener("message",function(t){if(t.source===window.parent){var r=t.data;if((null==r?void 0:r.type)==="SMARTPAGE_CSV_UPDATED"){var a=r.databaseIds;if(Array.isArray(a)&&0!==a.length){var i=a.filter(function(e){return"string"==typeof e});if(0!==i.length){var o={databaseIds:i},s=!0,u=!1,l=void 0;try{for(var d,c,f=(d=n.csvUpdatedHandlers,function(t){if(Array.isArray(t))return e(t)}(d)||function(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}(d)||function(t,r){if(t){if("string"==typeof t)return e(t,void 0);var n=Object.prototype.toString.call(t).slice(8,-1);if("Object"===n&&t.constructor&&(n=t.constructor.name),"Map"===n||"Set"===n)return Array.from(n);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return e(t,void 0)}}(d)||function(){throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}())[Symbol.iterator]();!(s=(c=f.next()).done);s=!0){var g=c.value;try{g(o)}catch(e){}}}catch(e){u=!0,l=e}finally{try{s||null==f.return||f.return()}finally{if(u)throw l}}}}}}})}return n(r,[{key:"addRecord",value:function(e){return this.bridge.call("database.addRecord",e)}},{key:"updateRecord",value:function(e){return this.bridge.call("database.updateRecord",e)}},{key:"deleteRecord",value:function(e){return this.bridge.call("database.deleteRecord",e)}},{key:"getSchema",value:function(e){return this.bridge.call("database.getSchema",e)}},{key:"getRecord",value:function(e){return this.bridge.call("database.getRecord",e)}},{key:"query",value:function(e){return this.bridge.call("database.query",e)}},{key:"aggregate",value:function(e){return this.bridge.call("database.aggregate",e)}},{key:"onUpdated",value:function(e){var t=this;return this.csvUpdatedHandlers.add(e),function(){t.csvUpdatedHandlers.delete(e)}}},{key:"uploadImage",value:function(e){return this.bridge.call("database.uploadImage",e)}},{key:"uploadFile",value:function(e){return this.bridge.call("database.uploadFile",e,6e5)}},{key:"getDownloadUrl",value:function(e){return this.bridge.call("database.getDownloadUrl",e)}},{key:"getPreviewUrl",value:function(e){return this.bridge.call("database.getPreviewUrl",e)}},{key:"getUserInfo",value:function(){return this.bridge.call("database.getUserInfo")}}]),r}(),s=window;s.__SMART_PAGE__=s.__SMART_PAGE__||{},s.__SMART_PAGE__.database=new o;})();</script><script data-page-node-id="LMRzzvUnXyOl3DGjLOIB31" data-pnid-children="RP3Duaj48kGM50zMfC6kn8" data-smartpage-injected="scroll">;(function(){
+}, true);</script><script data-page-node-id="wVpwE84hq7WVroipaU6uXY" data-pnid-children="U864D5Bm8tUy9yl7QarW3M" data-smartpage-injected="database">;(function(){"use strict";function e(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,n=Array(t);r<t;r++)n[r]=e[r];return n}function t(e,t){if(!(e instanceof t))throw TypeError("Cannot call a class as a function")}function r(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function n(e,t,n){return t&&r(e.prototype,t),n&&r(e,n),e}function a(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}var i=function(){"use strict";function e(){var r=this,n=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"*";t(this,e),a(this,"targetWindow",void 0),a(this,"targetOrigin",void 0),a(this,"pendingRequests",new Map),a(this,"counter",0),a(this,"RPC_TIMEOUT",3e4),this.targetWindow=window.parent,this.targetOrigin=n,window.addEventListener("message",function(e){var t=e.data;(null==t?void 0:t.type)==="rpc:response"&&r.handleResponse(t)})}return n(e,[{key:"call",value:function(e,t){var r=this,n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:this.RPC_TIMEOUT,i="rpc_".concat(Date.now(),"_").concat(++this.counter),o={id:i,method:e,params:void 0!==t?[t]:[],timestamp:Date.now()};return new Promise(function(t,s){var u=window.setTimeout(function(){r.pendingRequests.delete(i),s(Error("[database-sdk] RPC timeout: ".concat(e)))},n);r.pendingRequests.set(i,{resolve:t,reject:s,timer:u}),r.targetWindow.postMessage(function(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{},n=Object.keys(r);"function"==typeof Object.getOwnPropertySymbols&&(n=n.concat(Object.getOwnPropertySymbols(r).filter(function(e){return Object.getOwnPropertyDescriptor(r,e).enumerable}))),n.forEach(function(t){a(e,t,r[t])})}return e}({type:"rpc:request"},o),r.targetOrigin)})}},{key:"handleResponse",value:function(e){var t=this.pendingRequests.get(e.id);t&&(this.pendingRequests.delete(e.id),clearTimeout(t.timer),e.error?t.reject(Error("[database-sdk] RPC error: ".concat(e.error.message))):t.resolve(e.result))}}]),e}(),o=function(){"use strict";function r(){var n=this;t(this,r),a(this,"bridge",void 0),a(this,"csvUpdatedHandlers",new Set),this.bridge=new i(function(){try{var e=window.location.ancestorOrigins;if(e&&e.length>0){var t=e[0];if("string"==typeof t&&t)return t}}catch(e){}try{if(document.referrer)return new URL(document.referrer).origin}catch(e){}return console.warn("[smartpage-database-sdk] cannot resolve parent origin, falling back to '*'"),"*"}()),window.addEventListener("message",function(t){if(t.source===window.parent){var r=t.data;if((null==r?void 0:r.type)==="SMARTPAGE_CSV_UPDATED"){var a=r.databaseIds;if(Array.isArray(a)&&0!==a.length){var i=a.filter(function(e){return"string"==typeof e});if(0!==i.length){var o={databaseIds:i},s=!0,u=!1,l=void 0;try{for(var d,c,f=(d=n.csvUpdatedHandlers,function(t){if(Array.isArray(t))return e(t)}(d)||function(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}(d)||function(t,r){if(t){if("string"==typeof t)return e(t,void 0);var n=Object.prototype.toString.call(t).slice(8,-1);if("Object"===n&&t.constructor&&(n=t.constructor.name),"Map"===n||"Set"===n)return Array.from(n);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return e(t,void 0)}}(d)||function(){throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}())[Symbol.iterator]();!(s=(c=f.next()).done);s=!0){var g=c.value;try{g(o)}catch(e){}}}catch(e){u=!0,l=e}finally{try{s||null==f.return||f.return()}finally{if(u)throw l}}}}}}})}return n(r,[{key:"addRecord",value:function(e){return this.bridge.call("database.addRecord",e)}},{key:"updateRecord",value:function(e){return this.bridge.call("database.updateRecord",e)}},{key:"deleteRecord",value:function(e){return this.bridge.call("database.deleteRecord",e)}},{key:"getSchema",value:function(e){return this.bridge.call("database.getSchema",e)}},{key:"getRecord",value:function(e){return this.bridge.call("database.getRecord",e)}},{key:"query",value:function(e){return this.bridge.call("database.query",e)}},{key:"aggregate",value:function(e){return this.bridge.call("database.aggregate",e)}},{key:"onUpdated",value:function(e){var t=this;return this.csvUpdatedHandlers.add(e),function(){t.csvUpdatedHandlers.delete(e)}}},{key:"uploadImage",value:function(e){return this.bridge.call("database.uploadImage",e)}},{key:"uploadFile",value:function(e){return this.bridge.call("database.uploadFile",e,6e5)}},{key:"getDownloadUrl",value:function(e){return this.bridge.call("database.getDownloadUrl",e)}},{key:"getPreviewUrl",value:function(e){return this.bridge.call("database.getPreviewUrl",e)}},{key:"getUserInfo",value:function(){return this.bridge.call("database.getUserInfo")}}]),r}(),s=window;s.__SMART_PAGE__=s.__SMART_PAGE__||{},s.__SMART_PAGE__.database=new o;})();</script><script data-page-node-id="LMRzzvUnXyOl3DGjLOIB31" data-pnid-children="RP3Duaj48kGM50zMfC6kn8" data-smartpage-injected="scroll">;(function(){
   "use strict";
   if (window.__SMARTPAGE_BOTTOM_SPACE__) return;
   window.__SMARTPAGE_BOTTOM_SPACE__ = true;
@@ -482,8 +481,6 @@ document.addEventListener("click", function(e){
   if (document.readyState !== "complete") {
     window.addEventListener("load", notifyReady, { once: true });
   }
-})();
-
 })();</script><script data-smartpage-injected="database">;(function(){"use strict";function e(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,n=Array(t);r<t;r++)n[r]=e[r];return n}function t(e,t){if(!(e instanceof t))throw TypeError("Cannot call a class as a function")}function r(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function n(e,t,n){return t&&r(e.prototype,t),n&&r(e,n),e}function a(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}var i=function(){"use strict";function e(){var r=this,n=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"*";t(this,e),a(this,"targetWindow",void 0),a(this,"targetOrigin",void 0),a(this,"pendingRequests",new Map),a(this,"counter",0),a(this,"RPC_TIMEOUT",3e4),this.targetWindow=window.parent,this.targetOrigin=n,window.addEventListener("message",function(e){var t=e.data;(null==t?void 0:t.type)==="rpc:response"&&r.handleResponse(t)})}return n(e,[{key:"call",value:function(e,t){var r=this,n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:this.RPC_TIMEOUT,i="rpc_".concat(Date.now(),"_").concat(++this.counter),o={id:i,method:e,params:void 0!==t?[t]:[],timestamp:Date.now()};return new Promise(function(t,s){var u=window.setTimeout(function(){r.pendingRequests.delete(i),s(Error("[database-sdk] RPC timeout: ".concat(e)))},n);r.pendingRequests.set(i,{resolve:t,reject:s,timer:u}),r.targetWindow.postMessage(function(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{},n=Object.keys(r);"function"==typeof Object.getOwnPropertySymbols&&(n=n.concat(Object.getOwnPropertySymbols(r).filter(function(e){return Object.getOwnPropertyDescriptor(r,e).enumerable}))),n.forEach(function(t){a(e,t,r[t])})}return e}({type:"rpc:request"},o),r.targetOrigin)})}},{key:"handleResponse",value:function(e){var t=this.pendingRequests.get(e.id);t&&(this.pendingRequests.delete(e.id),clearTimeout(t.timer),e.error?t.reject(Error("[database-sdk] RPC error: ".concat(e.error.message))):t.resolve(e.result))}}]),e}(),o=function(){"use strict";function r(){var n=this;t(this,r),a(this,"bridge",void 0),a(this,"csvUpdatedHandlers",new Set),this.bridge=new i(function(){try{var e=window.location.ancestorOrigins;if(e&&e.length>0){var t=e[0];if("string"==typeof t&&t)return t}}catch(e){}try{if(document.referrer)return new URL(document.referrer).origin}catch(e){}return console.warn("[smartpage-database-sdk] cannot resolve parent origin, falling back to '*'"),"*"}()),window.addEventListener("message",function(t){if(t.source===window.parent){var r=t.data;if((null==r?void 0:r.type)==="SMARTPAGE_CSV_UPDATED"){var a=r.databaseIds;if(Array.isArray(a)&&0!==a.length){var i=a.filter(function(e){return"string"==typeof e});if(0!==i.length){var o={databaseIds:i},s=!0,u=!1,l=void 0;try{for(var d,c,f=(d=n.csvUpdatedHandlers,function(t){if(Array.isArray(t))return e(t)}(d)||function(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}(d)||function(t,r){if(t){if("string"==typeof t)return e(t,void 0);var n=Object.prototype.toString.call(t).slice(8,-1);if("Object"===n&&t.constructor&&(n=t.constructor.name),"Map"===n||"Set"===n)return Array.from(n);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return e(t,void 0)}}(d)||function(){throw TypeError("Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}())[Symbol.iterator]();!(s=(c=f.next()).done);s=!0){var g=c.value;try{g(o)}catch(e){}}}catch(e){u=!0,l=e}finally{try{s||null==f.return||f.return()}finally{if(u)throw l}}}}}}})}return n(r,[{key:"addRecord",value:function(e){return this.bridge.call("database.addRecord",e)}},{key:"updateRecord",value:function(e){return this.bridge.call("database.updateRecord",e)}},{key:"deleteRecord",value:function(e){return this.bridge.call("database.deleteRecord",e)}},{key:"getSchema",value:function(e){return this.bridge.call("database.getSchema",e)}},{key:"getRecord",value:function(e){return this.bridge.call("database.getRecord",e)}},{key:"query",value:function(e){return this.bridge.call("database.query",e)}},{key:"aggregate",value:function(e){return this.bridge.call("database.aggregate",e)}},{key:"onUpdated",value:function(e){var t=this;return this.csvUpdatedHandlers.add(e),function(){t.csvUpdatedHandlers.delete(e)}}},{key:"uploadImage",value:function(e){return this.bridge.call("database.uploadImage",e)}},{key:"uploadFile",value:function(e){return this.bridge.call("database.uploadFile",e,6e5)}},{key:"getDownloadUrl",value:function(e){return this.bridge.call("database.getDownloadUrl",e)}},{key:"getPreviewUrl",value:function(e){return this.bridge.call("database.getPreviewUrl",e)}},{key:"getUserInfo",value:function(){return this.bridge.call("database.getUserInfo")}}]),r}(),s=window;s.__SMART_PAGE__=s.__SMART_PAGE__||{},s.__SMART_PAGE__.database=new o;})();</script><script data-smartpage-injected="scroll">;(function(){
   "use strict";
   if (window.__SMARTPAGE_BOTTOM_SPACE__) return;
@@ -537,8 +534,6 @@ document.addEventListener("click", function(e){
   if (document.readyState !== "complete") {
     window.addEventListener("load", notifyReady, { once: true });
   }
-})();
-
 })();</script></head>
 <body data-page-node-id="AxaWttmJsXMpFyu4OLC2YZ" style="">
 <div data-page-node-id="PlIGG76td3APHjZlfQMdHG" class="page">
@@ -870,6 +865,72 @@ document.addEventListener("keydown", e => {
   }, {passive:true});
 })();
 
+// ---------- 外部链接打开（兼容微信/QQ 内置浏览器）----------
+function isWeChatBrowser(){
+  return /MicroMessenger/i.test(navigator.userAgent || "");
+}
+function openInNewWindow(url){
+  if(!url) return;
+  const ua = navigator.userAgent || "";
+  const fromWeChat = /MicroMessenger/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+  // 1) 安卓微信：location 跳转通常可以直接打开外部网页
+  if(fromWeChat && !isIOS){
+    window.location.href = url;
+    return;
+  }
+  // 2) iOS 微信：不允许直接跳外部域名，引导用户用系统浏览器打开，并支持复制链接
+  if(fromWeChat && isIOS){
+    showLinkGuide(url);
+    return;
+  }
+  // 3) 普通浏览器：新窗口打开，被拦截则当前页跳转
+  const w = window.open(url, "_blank", "noopener,noreferrer");
+  if(!w){
+    window.location.href = url;
+  }
+}
+
+function showLinkGuide(url){
+  let mask = document.getElementById("linkGuideMask");
+  if(!mask){
+    mask = document.createElement("div");
+    mask.id = "linkGuideMask";
+    mask.className = "modal-mask";
+    mask.innerHTML = `
+      <div class="modal">
+        <h3>在浏览器中打开链接</h3>
+        <p style="font-size:13px;line-height:1.7;color:var(--muted,#536471);margin:0 0 10px;">
+          微信内无法直接跳转外部网页，请点击右上角「···」选择<b>「在浏览器中打开」</b>；
+          或复制下面的链接后自行打开。
+        </p>
+        <input id="linkGuideInput" type="text" readonly style="font-size:12px;">
+        <div class="modal-btns">
+          <button class="mbtn ghost" onclick="document.getElementById('linkGuideMask').classList.remove('show')">关闭</button>
+          <button class="mbtn primary" id="linkGuideCopy">复制链接</button>
+        </div>
+      </div>`;
+    document.body.appendChild(mask);
+    mask.addEventListener("click", function(ev){
+      if(ev.target === mask) mask.classList.remove("show");
+    });
+  }
+  const inp = mask.querySelector("#linkGuideInput");
+  inp.value = url;
+  const btn = mask.querySelector("#linkGuideCopy");
+  btn.onclick = function(){
+    inp.select();
+    inp.setSelectionRange(0, 99999);
+    let ok = false;
+    try{ ok = document.execCommand("copy"); }catch(e){}
+    if(!ok && navigator.clipboard){ navigator.clipboard.writeText(url).catch(()=>{}); }
+    btn.textContent = "已复制";
+    setTimeout(()=>{ btn.textContent = "复制链接"; }, 1600);
+  };
+  mask.classList.add("show");
+}
+
 function render(){
   document.getElementById("topName").textContent = data.name;
   document.querySelector(".handle").textContent = data.handle;
@@ -911,12 +972,18 @@ function render(){
       <span class="pin-icon-wrap"><svg class="pin-icon" viewBox="0 0 24 24"><path d="M16 3v5.06l2.53 2.53c.29.29.47.68.47 1.1V13a1 1 0 0 1-1 1h-5v5.5a1.5 1.5 0 0 1-3 0V14H5a1 1 0 0 1-1-1v-1.31c0-.42.18-.81.47-1.1L7 8.06V3a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1z"/></svg></span>
       <span class="pin-text">${escapeHtml(pin.text || "点击跳转")}</span>
       <span class="pin-arrow">&rsaquo;</span>`;
-    // 编辑模式下拦截跳转，改为打开编辑弹窗
+    // 编辑模式下拦截跳转，改为打开编辑弹窗；非编辑模式由 openInNewWindow 处理（兼容微信）
     pe.addEventListener("click", function(ev){
       if(editMode){
         ev.preventDefault();
         ev.stopPropagation();
         window.openPinModal(activeTab);
+        return;
+      }
+      if(_pinUrl){
+        ev.preventDefault();
+        ev.stopPropagation();
+        openInNewWindow(_pinUrl);
       }
     });
     container.appendChild(pe);
